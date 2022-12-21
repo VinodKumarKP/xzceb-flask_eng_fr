@@ -16,25 +16,27 @@ language_translator = LanguageTranslatorV3(
 )
 
 language_translator.set_service_url(url)
-language_translator.set_disable_ssl_verification(True)
+
 
 def englishToFrench(englishText):
-    # write the code here
-    frenchText = language_translator.translate(
-        text=englishText,
-        model_id='en-fr').get_result()
 
-    # frenchText = json.dumps(frenchText, indent=2, ensure_ascii=False)
-    return frenchText['translations'][0]['translation']
+    if englishText and len(englishText) > 0:
+        frenchText = language_translator.translate(
+            text=englishText,
+            model_id='en-fr').get_result()
+
+        # frenchText = json.dumps(frenchText, indent=2, ensure_ascii=False)
+        return frenchText['translations'][0]['translation']
+    else:
+        return ''
 
 
 def frenchToEnglish(frenchText):
-    # write the code here
-    englishText = language_translator.translate(
-        text=frenchText,
-        model_id='fr-en').get_result()
-    return englishText['translations'][0]['translation']
 
-
-print(englishToFrench('Hello'))
-print(frenchToEnglish('Bonjour'))
+    if frenchText and len(frenchText) > 0:
+        englishText = language_translator.translate(
+            text=frenchText,
+            model_id='fr-en').get_result()
+        return englishText['translations'][0]['translation']
+    else:
+        return ''
